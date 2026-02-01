@@ -1,9 +1,17 @@
-<script setup>
-defineProps(['product']);
+<script setup lang="ts">
+const props = withDefaults(
+  defineProps<{
+    product: Product;
+  }>(),
+  {},
+);
 </script>
 
 <template>
-  <div class="product-card group cursor-pointer relative mb-10">
+  <NuxtLink
+    :to="`/products/${product.id}`"
+    class="product-card group cursor-pointer relative mb-10"
+  >
     <div class="relative overflow-hidden aspect-[3/4] bg-white">
       <img
         :src="product.image"
@@ -22,7 +30,7 @@ defineProps(['product']);
 
     <div class="mt-5 text-center">
       <h3 class="text-[15px] tracking-tight mb-1">{{ product.name }}</h3>
-      <p class="text-[14px] text-gray-400">${{ product.price }}</p>
+      <p class="text-[14px] text-gray-400">NT${{ product.price }}</p>
     </div>
-  </div>
+  </NuxtLink>
 </template>

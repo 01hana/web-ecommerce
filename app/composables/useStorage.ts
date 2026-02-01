@@ -1,21 +1,30 @@
-export function useStorage() {
-  function getLocalStorage(key: any): string | null {
-    return localStorage.getItem(key);
+type StorageType = 'local' | 'session';
+
+export function useStorage(type: StorageType = 'local') {
+  const storage = type === 'local' ? window.localStorage : window.sessionStorage;
+
+  function getItem(key: string): string | null {
+    return storage.getItem(key);
   }
 
-  function setLocalStorage(key: string, value: unknown) {
+  function setItem(key: string, value: unknown) {
     const stringified = typeof value === 'string' ? value : JSON.stringify(value);
 
-    localStorage.setItem(key, stringified);
+    storage.setItem(key, stringified);
   }
 
-  function removeLocalStorage(key: string) {
-    return localStorage.removeItem(key);
+  function removeItem(key: string) {
+    storage.removeItem(key);
+  }
+
+  function clear() {
+    storage.clear();
   }
 
   return {
-    getLocalStorage,
-    setLocalStorage,
-    removeLocalStorage,
+    getItem,
+    setItem,
+    removeItem,
+    clear,
   };
 }

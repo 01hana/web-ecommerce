@@ -1,17 +1,26 @@
-<script setup>
+<script setup lang="ts">
 import SideMenu from './SideMenu.vue';
+import DropdownMenu from '~/pages/cart/DropdownMenu.vue';
 
 const [isMenuOpen, setMenuOpen] = useAppState(false);
 const { menu } = useNavigation();
+const { cartItems, isCartMenuOpen } = storeToRefs(useCart());
+const { setCartMenuOpen, getAll } = useCart();
 
 const isScrolled = ref(false);
-const activeDropdown = ref(null);
+const activeDropdown = ref<number | null>(null);
 
 if (import.meta.client) {
   useEventListener(window, 'scroll', () => {
     isScrolled.value = window.scrollY > 50;
   });
 }
+
+onMounted(() => getAll());
+
+const toggleCart = () => {
+  setCartMenuOpen(!isCartMenuOpen.value);
+};
 </script>
 
 <template>
@@ -23,7 +32,7 @@ if (import.meta.client) {
   >
     <div class="flex-1 flex items-baseline gap-12">
       <NuxtLink to="/" class="text-[24px] font-bold tracking-[0.2em] uppercase">
-        Depot<span class="text-gray-400">.</span>
+        Doe<span class="text-gray-400">.</span>
       </NuxtLink>
 
       <nav class="items-center gap-8 hidden md:flex">
@@ -41,7 +50,7 @@ if (import.meta.client) {
             {{ item.label }}
           </NuxtLink>
 
-          <Transition name="dropdown">
+          <!-- <Transition name="dropdown">
             <div
               v-if="item.children && activeDropdown === index"
               class="absolute top-full min-w-[220px] bg-[#1b1b1b] p-8 z-[6000] shadow-xl"
@@ -57,19 +66,27 @@ if (import.meta.client) {
                 </li>
               </ul>
             </div>
-          </Transition>
+          </Transition> -->
         </div>
       </nav>
     </div>
 
     <div class="flex items-center">
-      <UButton to="/member" icon="solar:user-circle-outline" variant="text" />
+      <UButton to="/member" icon="solar:user-circle-outline" />
 
-      <UButton to="/cart" icon="solar:cart-large-2-linear" variant="text">
-        <span class="ml-1 text-[10px] bg-black text-white rounded-full px-1.5 py-0.5">0</span>
-      </UButton>
+      <div class="relative" @click.stop="toggleCart">
+        <UButton icon="solar:cart-large-2-linear" variant="ghost" class="hover:bg-transparent">
+          <span class="ml-1 text-[10px] bg-black text-white rounded-full px-1.5 py-0.5">
+            {{ cartItems?.length || 0 }}
+          </span>
+        </UButton>
 
-      <UButton @click="setMenuOpen(true)" variant="text" class="flex md:hidden flex-col gap-1.5 group ml-4">
+        <Transition name="cart-pop">
+          <DropdownMenu v-if="isCartMenuOpen" />
+        </Transition>
+      </div>
+
+      <UButton @click="setMenuOpen(true)" class="flex md:hidden flex-col gap-1.5 group ml-4">
         <span class="w-6 h-[1.5px] bg-black transition-all group-hover:w-4" />
         <span class="w-6 h-[1.5px] bg-black"></span>
         <span class="w-4 h-[1.5px] bg-black transition-all group-hover:w-6"></span>
@@ -90,5 +107,16 @@ if (import.meta.client) {
 .dropdown-leave-to {
   opacity: 0;
   transform: translate(-50%, 15px);
+}
+
+.cart-pop-enter-active,
+.cart-pop-leave-active {
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.cart-pop-enter-from,
+.cart-pop-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>

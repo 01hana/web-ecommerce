@@ -2,11 +2,11 @@ export default defineNuxtRouteMiddleware(async to => {
   const { getUser, setLoginState } = useAuth();
   const { user, isLoginState } = storeToRefs(useAuth());
 
-  const { getLocalStorage } = useStorage();
+  const { getItem } = useStorage();
 
   const isEnterAuthRoute = to.meta.resource === 'auth';
 
-  const accessToken = getLocalStorage('accessToken');
+  const accessToken = getItem('accessToken');
 
   const publicPages = ['/auth/login', '/auth/forgot', '/auth/reset'];
 

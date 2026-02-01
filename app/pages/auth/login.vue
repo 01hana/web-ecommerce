@@ -1,7 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { gsap } from 'gsap';
 
-// 動畫邏輯
 onMounted(() => {
   const tl = gsap.timeline();
 
@@ -39,7 +38,6 @@ const show = ref(false);
           <UForm id="login-form" :state="{}" class="space-y-6">
             <UButton
               icon="logos:google-icon"
-              variant="text"
               class="w-full border border-gray-200 py-3 rounded-full flex items-center justify-center gap-3 hover:bg-gray-50 transition-all group"
             >
               <span class="text-sm font-medium">Sign in with Google</span>
@@ -59,7 +57,6 @@ const show = ref(false);
               <FormField name="password" label="密碼" :type="show ? 'text' : 'password'">
                 <UButton
                   color="neutral"
-                  variant="link"
                   size="sm"
                   :icon="show ? 'fluent:eye-off-24-filled' : 'fluent:eye-24-filled'"
                   @click="show = !show"
@@ -77,7 +74,7 @@ const show = ref(false);
 
             <UButton
               label="登入"
-              class="w-full flex justify-center bg-[#1b1b1b] text-white py-5 rounded-xl uppercase tracking-[0.3em] font-bold hover:bg-black transition-all shadow-lg active:scale-[0.98]"
+              class="w-full flex justify-center text-white bg-[#1b1b1b] hover:text-white hover:bg-black py-5 rounded-xl uppercase tracking-[0.3em] font-bold transition-all shadow-lg active:scale-[0.98]"
             />
 
             <div class="flex items-center justify-center gap-2 tracking-wide">
@@ -92,7 +89,7 @@ const show = ref(false);
 
       <div class="hidden lg:block lg:w-1/2 bg-[#f4f1ee] relative overflow-hidden login-image">
         <img
-          src="https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=1000&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1589363358751-ab05797e5629?q=80&w=627&auto=format&fit=crop"
           alt="Login Decor"
           class="w-full h-full object-cover mix-blend-multiply opacity-90"
         />
@@ -102,7 +99,7 @@ const show = ref(false);
           <p class="font-serif text-2xl mb-2">
             "Design is not just what it looks like and feels like. Design is how it works."
           </p>
-          <span class="text-[10px] uppercase tracking-[0.4em] opacity-70">— Depot Studio</span>
+          <span class="text-[10px] uppercase tracking-[0.4em] opacity-70">— Doe.</span>
         </div>
       </div>
     </div>

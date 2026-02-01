@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { gsap } from 'gsap';
 
 const props = defineProps(['isOpen']);
@@ -54,16 +54,10 @@ watch(
         @click="emit('close')"
         icon="fluent:dismiss-circle-32-regular"
         class="absolute top-10 right-10 group"
-        variant="text"
       />
 
       <nav class="space-y-6">
-        <div
-          v-for="(item, index) in menu"
-          :key="index"
-          ref="menuItems"
-          class="overflow-hidden"
-        >
+        <div v-for="(item, index) in menu" :key="index" ref="menuItems" class="overflow-hidden">
           <NuxtLink
             to="/"
             class="text-[32px] font-serif hover:italic transition-all duration-300 block"

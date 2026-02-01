@@ -12,9 +12,9 @@ export const useAuth = defineStore('auth', () => {
   }
 
   function setToken(data: string) {
-    const { setLocalStorage } = useStorage();
+    const { setItem } = useStorage();
 
-    setLocalStorage('accessToken', data);
+    setItem('accessToken', data);
   }
 
   function setLoginState(state: boolean) {
@@ -58,9 +58,9 @@ export const useAuth = defineStore('auth', () => {
   function clearAuth() {
     user.value = {};
 
-    const { removeLocalStorage } = useStorage();
+    const { removeItem } = useStorage();
 
-    removeLocalStorage('accessToken');
+    removeItem('accessToken');
 
     router.push('/auth/login');
   }

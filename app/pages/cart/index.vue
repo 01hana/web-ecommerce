@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>cart</div>
+  <UContainer>
+    <div>Coming Soon...</div>
+  </UContainer>
 </template>
 
 <style scoped></style>

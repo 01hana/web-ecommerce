@@ -4,7 +4,7 @@ export default defineAppConfig({
       base: 'w-full max-w-1280',
     },
     colors: {
-      primary: 'sky',
+      primary: 'netural',
       neutral: 'zinc',
     },
     button: {
@@ -13,7 +13,7 @@ export default defineAppConfig({
       },
       defaultVariants: {
         color: 'primary',
-        variant: 'subtle',
+        variant: 'link',
         size: 'lg',
       },
     },

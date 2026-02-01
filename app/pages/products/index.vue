@@ -1,7 +1,6 @@
-<script setup>
+<script setup lang="ts">
 import { gsap } from 'gsap';
 
-// 1. 分類與商品資料
 const categories = ['All', 'Accessories', 'Tops', 'Bottoms', 'Decoration'];
 const activeTab = ref('All');
 
@@ -9,28 +8,28 @@ const allProducts = ref([
   {
     id: 1,
     name: 'Minimal Vase',
-    price: '45.00',
+    price: '790',
     category: 'Decoration',
     image: 'https://picsum.photos/600/800?random=11',
   },
   {
     id: 2,
     name: 'Table Lamp',
-    price: '120.00',
+    price: '890',
     category: 'Bottoms',
     image: 'https://picsum.photos/600/800?random=12',
   },
   {
     id: 3,
     name: 'Handbag',
-    price: '95.00',
+    price: '990',
     category: 'Accessories',
     image: 'https://picsum.photos/600/800?random=13',
   },
   {
     id: 4,
     name: 'Wooden Chair',
-    price: '250.00',
+    price: '1,090',
     category: 'Tops',
     image: 'https://picsum.photos/600/800?random=14',
   },
@@ -42,7 +41,7 @@ const filteredProducts = computed(() => {
   return allProducts.value.filter(p => p.category === activeTab.value);
 });
 
-function changeTab(category) {
+function changeTab(category: string) {
   // 先將現有商品淡出
   gsap.to('.product-item', {
     opacity: 0,
@@ -50,7 +49,7 @@ function changeTab(category) {
     duration: 0.3,
     stagger: 0.05,
     onComplete: () => {
-      activeTab.value = category; // 切換資料
+      activeTab.value = category;
       // 資料切換後自動觸發 nextTick 執行進入動畫
       nextTick(() => {
         gsap.fromTo(
@@ -83,9 +82,10 @@ function changeTab(category) {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
-      <div
+      <NuxtLink
         v-for="product in filteredProducts"
         :key="product.id"
+        :to="`/products/${product.id}`"
         class="product-item group cursor-pointer"
       >
         <div class="relative overflow-hidden aspect-[3/4] mb-4">
@@ -108,7 +108,7 @@ function changeTab(category) {
           <h3 class="text-[14px] tracking-tight">{{ product.name }}</h3>
           <p class="text-[13px] text-gray-400 mt-1">${{ product.price }}</p>
         </div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>

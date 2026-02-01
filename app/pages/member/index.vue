@@ -2,7 +2,7 @@
 
 <template>
   <UContainer>
-    <div>member</div>
+    <div>Coming Soon...</div>
   </UContainer>
 </template>
 
