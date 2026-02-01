@@ -8,9 +8,9 @@ export default defineNuxtRouteMiddleware(async to => {
 
   const accessToken = getItem('accessToken');
 
-  const publicPages = ['/auth/login', '/auth/forgot', '/auth/reset'];
+  const authPages = ['/member', '/cart'];
 
-  const requiresAuth = !publicPages.some(page => to.path.includes(page));
+  const requiresAuth = authPages.some(page => to.path.includes(page));
 
   // if (accessToken) {
   //   if (!isLoginState.value) {
@@ -19,21 +19,19 @@ export default defineNuxtRouteMiddleware(async to => {
   //         const { clearAuth } = useAuth();
 
   //         clearAuth();
-
   //       }
   //     });
   //   }
+  // }
 
   /**
    * 登入後重設登入狀態
    */
   // if (requiresAuth && isLoginState.value && !isEnterAuthRoute) setLoginState(false);
 
-  // if (requiresAuth && !accessToken) {
-  //   $clearAbility();
-
-  //   return navigateTo('/auth/login');
-  // }
+  if (requiresAuth && !accessToken) {
+    return navigateTo('/auth/login');
+  }
 
   // if (to.path.includes('/auth/reset') && !to.query.token) {
   //   return navigateTo('/auth/login');
