@@ -40,23 +40,6 @@ onMounted(() => {
     ease: 'power3.out',
     delay: 0.2,
   });
-
-  const images = document.querySelectorAll('.reveal-img');
-
-  images.forEach(img => {
-    gsap.from(img, {
-      scrollTrigger: {
-        trigger: img,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      y: 60,
-      opacity: 0,
-      scale: 1.05,
-      duration: 1.5,
-      ease: 'power2.out',
-    });
-  });
 });
 
 function handleAdd() {
@@ -83,7 +66,7 @@ function handleAdd() {
         <div
           v-for="(img, idx) in product.images"
           :key="idx"
-          class="reveal-img w-full bg-[#f6f6f6] overflow-hidden"
+          class="w-full bg-[#f6f6f6] overflow-hidden"
         >
           <img
             :src="img"

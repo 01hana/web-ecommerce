@@ -24,7 +24,7 @@ const show = ref(false);
 <template>
   <div class="min-h-[calc(100vh-60px)] flex items-center justify-center py-12 px-4">
     <div
-      class="max-w-6xl w-full bg-white flex flex-col lg:flex-row overflow-hidden shadow-sm border border-gray-100 rounded-xl lg:rounded-[2rem]"
+      class="max-w-6xl w-full bg-white flex flex-col lg:flex-row overflow-hidden rounded-sm"
     >
       <div class="w-full lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center">
         <div class="login-form-content">

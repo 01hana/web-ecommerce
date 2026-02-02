@@ -4,6 +4,7 @@ import DropdownMenu from '~/pages/cart/DropdownMenu.vue';
 
 const [isMenuOpen, setMenuOpen] = useAppState(false);
 const { menu } = useNavigation();
+const route = useRoute();
 const { cartItems, isCartMenuOpen } = storeToRefs(useCart());
 const { setCartMenuOpen, getAll } = useCart();
 
@@ -17,6 +18,12 @@ if (import.meta.client) {
 }
 
 onMounted(() => getAll());
+
+watch(route, newRoute => {
+  if (!newRoute || !isMenuOpen.value) return;
+
+  setMenuOpen(false);
+});
 
 const toggleCart = () => {
   setCartMenuOpen(!isCartMenuOpen.value);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import 'swiper/css';
+import HeroSlider from './HeroSlider.vue';
 import ProductCard from './ProductCard.vue';
 
 if (import.meta.client) {
@@ -47,20 +47,19 @@ onMounted(() => {
 
 <template>
   <div>
-    <section class="h-[80vh] flex flex-col items-center justify-center text-center">
+    <HeroSlider />
+
+    <section class="h-[60vh] flex flex-col items-center justify-center text-center">
       <div class="hero-text">
         <h2 class="text-[12px] tracking-[0.4em] uppercase mb-4 text-gray-400 font-bold">
-          New Collection
+          Products
         </h2>
-        <h1 class="text-[5vw] font-serif leading-tight mb-8">
-          Feb. <br />
-          Soft Poise
-        </h1>
+        <h1 class="text-[4vw] font-serif mb-8">New Arrivals</h1>
         <NuxtLink
           to="/products"
           class="cursor-pointer border-b border-black text-[13px] tracking-[0.2em] uppercase pb-1 hover:text-gray-400 hover:border-gray-400 transition-all"
         >
-          Explore More
+          Explore All
         </NuxtLink>
       </div>
     </section>

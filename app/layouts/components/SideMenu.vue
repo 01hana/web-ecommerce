@@ -59,7 +59,7 @@ watch(
       <nav class="space-y-6">
         <div v-for="(item, index) in menu" :key="index" ref="menuItems" class="overflow-hidden">
           <NuxtLink
-            to="/"
+            :to="item.to"
             class="text-[32px] font-serif hover:italic transition-all duration-300 block"
           >
             {{ item.label }}
@@ -71,7 +71,6 @@ watch(
         <p class="text-[12px] tracking-widest text-gray-400 uppercase mb-4">Follow Us</p>
         <div class="flex gap-6 text-[13px]">
           <a href="#" class="hover:text-gray-400">Instagram</a>
-          <a href="#" class="hover:text-gray-400">Pinterest</a>
         </div>
       </div>
     </div>
